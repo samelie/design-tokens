@@ -1,0 +1,29 @@
+{
+    "name": "@rad/design-tokens",
+    "version": "1.0.0",
+    "description": "NOT USING type:module because of incompatibility style-dictionary and .cjs",
+    "license": "MIT",
+    "exports": {
+        ".": {
+            "import": "./src/index.ts"
+        },
+        "./dark.css": "./output/dark.css",
+        "./dark": "./output/dark.ts",
+        "./light.css": "./output/light.css",
+        "./light": "./output/light.ts"
+    },
+    "scripts": {
+        "build": "npm run pkgup -w @rad/scripts -- \"$(pwd)\" --fmt cjs --dts false && node ./sd.config.cjs && npm run lint-fix && npm run format",
+        "lint": "eslint .",
+        "lint-fix": "eslint --fix .",
+        "types": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build"
+    },
+    "dependencies": {
+        "@rad/eslint": "workspace:*",
+        "polished": "^4.3.1",
+        "style-dictionary": "^3.9.2"
+    },
+    "devDependencies": {
+        "eslint": "^9.13.0"
+    }
+}
