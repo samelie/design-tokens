@@ -1,7 +1,7 @@
-import { transparentize } from "polished";
-
 import type { ColorImplementationKeys } from "../types/color";
+
 import type { DesignTokenValue } from "../types/shared";
+import { transparentize } from "polished";
 
 type ThemeColorConfig = Record<ColorImplementationKeys, DesignTokenValue>;
 
@@ -12,20 +12,19 @@ interface CoercedOpts {
 const DISABLED_OPACITY = 0.7;
 
 // TODO: Remove eslint disable and fix error (seems like function needs reworked - MRD)
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
+// eslint-disable-next-line ts/no-explicit-any
 function getNestedColor<T, K extends any[]>(obj: T, arr: K): DesignTokenValue {
     const errMsg = `Malformed object. You likely have a bad key for final entry ${arr}`;
     const result: DesignTokenValue | undefined = arr.reduce((prev: T | undefined, k) => {
         if (!prev) {
-            throw Error(errMsg);
+            throw new Error(errMsg);
         }
         // @ts-expect-error wahteverokay
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         return prev[k];
     }, obj);
     // This is a util fn used by config generator. Throwing here will short-circuit bad config
     if (!result?.value) {
-        throw Error(errMsg);
+        throw new Error(errMsg);
     }
     return result;
 }

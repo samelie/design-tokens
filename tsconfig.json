@@ -1,14 +1,110 @@
 {
-    "extends": "../config/base.tsconfig.json",
-    "include": [
-        "src"
-    ],
     "compilerOptions": {
-        "composite": true,
-        "skipLibCheck": true,
-        "target": "ES2020",
+        "resolveJsonModule": true,
+        "strictNullChecks": true,
+        "esModuleInterop": true,
+        "verbatimModuleSyntax": true,
+        "skipDefaultLibCheck": true,
+        "target": "ESNext",
+        "useDefineForClassFields": true,
         "module": "ESNext",
+        "lib": [
+            "ESNext",
+            "DOM",
+            "DOM.Iterable"
+        ],
+        "skipLibCheck": true,
         "moduleResolution": "bundler",
-        "allowSyntheticDefaultImports": true
+        "allowImportingTsExtensions": true,
+        "isolatedModules": true,
+        "moduleDetection": "force",
+        "noEmit": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "noUncheckedSideEffectImports": true,
+        "paths": {
+            "@rad/env": [
+                "./packages/env/src/index",
+                "../env/src/index",
+                "../packages/env/src/index",
+                "../../packages/env/src/index",
+                "../../../packages/env/src/index"
+            ],
+            "@rad/vite": [
+                "./packages/vite/src/index",
+                "../vite/src/index",
+                "../packages/vite/src/index",
+                "../../packages/vite/src/index",
+                "../../../packages/vite/src/index"
+            ],
+            "@rad/publish": [
+                "./packages/publish/src/*",
+                "../publish/src/*",
+                "../packages/publish/src/*",
+                "../../packages/publish/src/*",
+                "../../../packages/publish/src/*"
+            ],
+            "@rad/design-tokens/*": [
+                "./packages/design-tokens/*",
+                "../design-tokens/*",
+                "../packages/design-tokens/*",
+                "../../packages/design-tokens/*",
+                "../../../packages/design-tokens/*"
+            ],
+            "@rad/eslint-plugin-rules": [
+                "./packages/eslint-plugin-rules",
+                "../eslint-plugin-rules",
+                "../packages/eslint-plugin-rules",
+                "../../packages/eslint-plugin-rules",
+                "../../../packages/eslint-plugin-rules",
+                "../../../../packages/eslint-plugin-rules"
+            ],
+            "@rad/global-type-defs": [
+                "./packages/global-type-defs",
+                "../global-type-defs",
+                "../packages/global-type-defs",
+                "../../packages/global-type-defs",
+                "../../../packages/global-type-defs",
+                "../../../../packages/global-type-defs"
+            ],
+            "@rad/type-utils": [
+                "./packages/type-utils/src/index",
+                "../type-utils/src/index",
+                "../packages/type-utils/src/index",
+                "../../packages/type-utils/src/index",
+                "../../../packages/type-utils/src/index"
+            ]
+        },
+        "types": [
+            "node"
+        ],
+        "rootDir": "."
+    },
+    "include": [
+        "src",
+        "output"
+    ],
+    "exclude": [
+        "node_modules",
+        "dist",
+        "build"
+    ],
+    "references": [
+        {
+            "path": "./builder.tsconfig.json"
+        }
+    ],
+    "watchOptions": {
+        "excludeDirectories": [
+            "**/node_modules",
+            "build",
+            "dist"
+        ],
+        "fallbackPolling": "dynamicPriority",
+        "synchronousWatchDirectory": true,
+        "watchDirectory": "UseFsEvents",
+        "watchFile": "UseFsEventsOnParentDirectory"
     }
 }

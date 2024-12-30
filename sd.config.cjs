@@ -1,6 +1,6 @@
-const { SUPPORTED_THEMES } = require("./constants.cjs");
-const StyleDictionary = require("style-dictionary");
 const { parseToRgb } = require("polished");
+const StyleDictionary = require("style-dictionary");
+const { SUPPORTED_THEMES } = require("./constants.cjs");
 
 const CUSTOM_RGB = "color/custom-rgb-colors";
 const CLASSED_VARIABLES = "css/classed-variables";
@@ -15,7 +15,7 @@ const isTSColor = prop => {
 const containsRGB = prop => {
     const { name, attributes } = prop;
     const { category, type, item, subitem } = attributes;
-    return [category, type, item, subitem].some(entry => entry === "color") && name.includes("rgb");
+    return [category, type, item, subitem].includes("color") && name.includes("rgb");
 };
 
 (function initCustomTransforms() {
@@ -25,7 +25,7 @@ const containsRGB = prop => {
     StyleDictionary.registerFilter({
         name: REMOVE_ONLY_CSS_VALUES,
         matcher: prop => {
-            return !prop.name.toLowerCase().includes("rgb") && prop.path.indexOf("font") === -1;
+            return !prop.name.toLowerCase().includes("rgb") && !prop.path.includes("font");
         },
     });
 
@@ -155,7 +155,7 @@ const config = (function initSDConfig() {
 
     function getCSS(name) {
         return {
-            //Same transforms as "CSS" OOTB transformGroup + custom rgb
+            // Same transforms as "CSS" OOTB transformGroup + custom rgb
             transforms: [
                 "attribute/cti",
                 "name/cti/kebab",
@@ -181,7 +181,7 @@ const config = (function initSDConfig() {
     return { getCSS, getJSConfig, getSCSS, getTSColors };
 })();
 
-SUPPORTED_THEMES.forEach(function (name) {
+SUPPORTED_THEMES.forEach(name => {
     const mapping = {
         source: [`build/tokens/shared/*.js`, `build/tokens/*/${name}.js`],
         platforms: {
