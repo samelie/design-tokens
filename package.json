@@ -26,7 +26,7 @@
         "style-dictionary": "^4.3.3"
     },
     "devDependencies": {
-        "eslint": "^9.23.0",
+        "eslint": "^9.25.0",
         "unbuild": "^3.5.0"
     }
 }
