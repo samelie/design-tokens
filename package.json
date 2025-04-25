@@ -20,12 +20,12 @@
         "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build"
     },
     "dependencies": {
-        "@rad/eslint": "workspace:*",
         "@rad/publish": "workspace:*",
         "polished": "^4.3.1",
-        "style-dictionary": "^4.3.3"
+        "style-dictionary": "^4.4.0"
     },
     "devDependencies": {
+        "@rad/eslint": "workspace:*",
         "eslint": "^9.25.1",
         "unbuild": "^3.5.0"
     }
