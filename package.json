@@ -1,32 +1,33 @@
 {
-    "name": "@rad/design-tokens",
-    "version": "1.0.0",
-    "description": "NOT USING type:module because of incompatibility style-dictionary and .cjs",
-    "license": "MIT",
-    "exports": {
-        ".": {
-            "import": "./src/index.ts"
-        },
-        "./dark.css": "./output/dark.css",
-        "./dark": "./output/dark.ts",
-        "./light.css": "./output/light.css",
-        "./light": "./output/light.ts"
+  "name": "@rad/design-tokens",
+  "version": "1.0.0",
+  "description": "NOT USING type:module because of incompatibility style-dictionary and .cjs",
+  "license": "MIT",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts"
     },
-    "scripts": {
-        "build": "unbuild && node ./sd.config.cjs",
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix .",
-        "types": "tsc -p tsconfig.typecheck.json",
-        "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build"
-    },
-    "dependencies": {
-        "@rad/publish": "workspace:*",
-        "polished": "^4.3.1",
-        "style-dictionary": "^4.4.0"
-    },
-    "devDependencies": {
-        "@rad/eslint": "workspace:*",
-        "eslint": "^9.25.1",
-        "unbuild": "^3.5.0"
-    }
+    "./dark.css": "./output/dark.css",
+    "./dark": "./output/dark.ts",
+    "./light.css": "./output/light.css",
+    "./light": "./output/light.ts"
+  },
+  "scripts": {
+    "build": "unbuild && node ./sd.config.cjs",
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "types": "tsc -p tsconfig.typecheck.json",
+    "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build"
+  },
+  "dependencies": {
+    "@rad/publish": "workspace:*",
+    "polished": "^4.3.1",
+    "style-dictionary": "^4.4.0"
+  },
+  "devDependencies": {
+    "@rad/eslint": "workspace:*",
+    "eslint": "^9.25.1",
+    "unbuild": "^3.5.0",
+    "typescript": "^5.8.3"
+  }
 }
