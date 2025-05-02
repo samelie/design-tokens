@@ -1,4 +1,4 @@
-import { makeConfig } from "@rad/publish/build.config.ts";
+import { makeConfig } from "@rad/publish/src/build.config";
 
 export default makeConfig({
     entries: ["src/index"],
