@@ -113,9 +113,9 @@
         "strictBuiltinIteratorReturn": true,
         "alwaysStrict": true,
         "useUnknownInCatchVariables": true,
-        "allowSyntheticDefaultImports": true,
         "resolvePackageJsonExports": true,
         "resolvePackageJsonImports": true,
+        "allowSyntheticDefaultImports": true,
         "preserveConstEnums": true,
         "composite": true
     },
@@ -126,6 +126,8 @@
     "exclude": [
         "node_modules",
         "dist",
-        "build"
+        "build",
+        "output",
+        "output-results"
     ]
 }
