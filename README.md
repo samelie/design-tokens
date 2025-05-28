@@ -9,3 +9,15 @@ Steps to create a new theme.
 3. Run `npm run build`
 4. Generated code is in `packages/design-tokens/src/themes` and `output`
 5. `output` is where other packages and apps import from, so have a look in `exports` in `package.json`
+
+
+## Scripts
+
+| Script | Description |
+|--------|-------------|
+| `build` | `unbuild && node ./sd.config.cjs` |
+| `lint` | `eslint .` |
+| `lint:fix` | `eslint --fix .` |
+| `types` | `tsc -p tsconfig.typecheck.json` |
+| `types2` | `npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build` |
+
