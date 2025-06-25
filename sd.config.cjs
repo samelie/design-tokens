@@ -4,7 +4,7 @@ const { SUPPORTED_THEMES } = require("./constants.cjs");
 
 const CUSTOM_RGB = "color/custom-rgb-colors";
 const CLASSED_VARIABLES = "css/classed-variables";
-const HEADER_NAME = "andurilFileHeader";
+const HEADER_NAME = "radFileHeader";
 const REMOVE_ONLY_CSS_VALUES = "css/only-css";
 const TS_COLOR = "color/ts-colors";
 
@@ -166,7 +166,6 @@ const config = (function initSDConfig() {
                 CUSTOM_RGB,
             ],
             buildPath: `output/`,
-            // anduril-industries namespace
             prefix: "ai",
             files: [
                 {
