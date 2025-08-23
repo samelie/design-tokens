@@ -22,11 +22,11 @@
   "dependencies": {
     "@rad/publish": "workspace:*",
     "polished": "^4.3.1",
-    "style-dictionary": "^5.0.1"
+    "style-dictionary": "^5.0.2"
   },
   "devDependencies": {
     "@rad/eslint": "workspace:*",
-    "eslint": "^9.33.0",
+    "eslint": "^9.34.0",
     "typescript": "^5.9.2",
     "unbuild": "^3.6.1"
   },
