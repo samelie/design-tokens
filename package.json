@@ -26,11 +26,11 @@
     "style-dictionary": "^5.0.4"
   },
   "devDependencies": {
+    "@rad/config": "workspace:*",
     "@rad/eslint": "workspace:*",
     "eslint": "^9.36.0",
     "typescript": "^5.9.2",
-    "unbuild": "^3.6.1",
-    "@rad/config": "workspace:*"
+    "unbuild": "^3.6.1"
   },
   "type": "module"
 }
