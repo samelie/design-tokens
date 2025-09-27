@@ -17,7 +17,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "types": "tsc -p tsconfig.typecheck.json",
-    "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build"
+    "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build",
+    "knip": "knip"
   },
   "dependencies": {
     "@rad/publish": "workspace:*",
@@ -28,7 +29,8 @@
     "@rad/eslint": "workspace:*",
     "eslint": "^9.36.0",
     "typescript": "^5.9.2",
-    "unbuild": "^3.6.1"
+    "unbuild": "^3.6.1",
+    "@rad/config": "workspace:*"
   },
   "type": "module"
 }
