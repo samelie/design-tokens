@@ -13,11 +13,10 @@
     "./light": "./output/light.ts"
   },
   "scripts": {
-    "build": "unbuild && node ./sd.config.cjs",
+    "build": "unbuild && tsx ./sd.config.mts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "types": "tsc -p tsconfig.typecheck.json",
-    "types2": "npx -y tsc -p . --excludeFiles sd.config.cjs --outDir build",
     "knip": "knip"
   },
   "dependencies": {
@@ -29,6 +28,7 @@
     "@rad/config": "workspace:*",
     "@rad/eslint": "workspace:*",
     "eslint": "^9.36.0",
+    "tsx": "^4.20.6",
     "typescript": "^5.9.2",
     "unbuild": "^3.6.1"
   },
