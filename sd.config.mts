@@ -1,27 +1,37 @@
-import { parseToRgb } from "polished";
+import { parseToRgb, parseToHsl } from "polished";
 import StyleDictionary from "style-dictionary";
 import { promises as fs } from "fs";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
+import { formatCss, oklch } from "culori";
 import { SUPPORTED_THEMES } from "./constants.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const CUSTOM_RGB = "color/custom-rgb-colors";
+const CUSTOM_HSL = "color/custom-hsl-colors";
+const CUSTOM_OKLCH = "color/custom-oklch-colors";
+const CUSTOM_CSS = "color/custom-css-hex";
 const CLASSED_VARIABLES = "css/classed-variables";
 const HEADER_NAME = "radFileHeader";
 const REMOVE_ONLY_CSS_VALUES = "css/only-css";
 const TS_COLOR = "color/ts-colors";
 
 const isTSColor = (prop: any) => {
-    return prop.path.includes("color") && !prop.name.toLowerCase().includes("rgb");
+    return prop.path.includes("color") && !prop.name.toLowerCase().includes("rgb") && !prop.name.toLowerCase().includes("hsl") && !prop.name.toLowerCase().includes("oklch");
 };
 
 const containsRGB = (prop: any) => {
-    const { name, attributes } = prop;
-    const { category, type, item, subitem } = attributes;
-    return [category, type, item, subitem].includes("color") && name.includes("rgb");
+    return prop.name && prop.name.includes("rgb");
+};
+
+const containsHSL = (prop: any) => {
+    return prop.name && prop.name.includes("hsl");
+};
+
+const containsOKLCH = (prop: any) => {
+    return prop.name && prop.name.includes("oklch");
 };
 
 const config = (function initSDConfig() {
@@ -84,14 +94,16 @@ const config = (function initSDConfig() {
 
     function getCSS(name: string) {
         return {
-            // Same transforms as "CSS" OOTB transformGroup + custom rgb
+            // Custom transforms for RGB, HSL, OKLCH, and standard CSS hex
             transforms: [
                 "attribute/cti",
                 "name/kebab",
                 "time/seconds",
                 "size/rem",
-                "color/css",
                 CUSTOM_RGB,
+                CUSTOM_HSL,
+                CUSTOM_OKLCH,
+                CUSTOM_CSS,
             ],
             buildPath: `output/`,
             prefix: "ai",
@@ -171,9 +183,55 @@ async function buildThemes() {
                     [CUSTOM_RGB]: {
                         type: "value",
                         filter: containsRGB,
+                        transitive: true,
                         transform: (prop: any) => {
                             const color = parseToRgb(prop.original.value);
                             return `${color.red},${color.green},${color.blue}`;
+                        }
+                    },
+                    [CUSTOM_HSL]: {
+                        type: "value",
+                        filter: containsHSL,
+                        transitive: true,
+                        transform: (prop: any) => {
+                            // Use the actual value from the token, which should be a hex color
+                            const hexValue = prop.value || prop.original?.value || prop.original?.$value;
+                            const color = parseToHsl(hexValue);
+                            const h = Math.round(color.hue);
+                            const s = Math.round(color.saturation * 100);
+                            const l = Math.round(color.lightness * 100);
+                            return `${h} ${s}% ${l}%`;
+                        }
+                    },
+                    [CUSTOM_OKLCH]: {
+                        type: "value",
+                        filter: containsOKLCH,
+                        transitive: true,
+                        transform: (prop: any) => {
+                            // Use the actual value from the token
+                            const hexValue = prop.value || prop.original?.value || prop.original?.$value;
+                            const color = oklch(hexValue);
+                            if (!color) return hexValue;
+                            // Format: L C H (lightness, chroma, hue)
+                            const l = color.l?.toFixed(3) ?? "0";
+                            const c = color.c?.toFixed(3) ?? "0";
+                            const h = color.h?.toFixed(1) ?? "0";
+                            return `${l} ${c} ${h}`;
+                        }
+                    },
+                    [CUSTOM_CSS]: {
+                        type: "value",
+                        filter: (prop: any) => {
+                            // Only convert colors that are NOT rgb/hsl/oklch variants
+                            return prop.path.includes("color") &&
+                                   !prop.name.includes("rgb") &&
+                                   !prop.name.includes("hsl") &&
+                                   !prop.name.includes("oklch");
+                        },
+                        transitive: true,
+                        transform: (prop: any) => {
+                            // Simple hex conversion (same as color/css for non-alpha colors)
+                            return prop.value;
                         }
                     }
                 },
