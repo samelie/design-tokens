@@ -28,7 +28,7 @@
   "devDependencies": {
     "@rad/config": "workspace:*",
     "@rad/eslint": "workspace:*",
-    "eslint": "^9.36.0",
+    "eslint": "^9.37.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
