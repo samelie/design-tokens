@@ -1,19 +1,56 @@
 {
   "name": "@rad/design-tokens",
   "version": "1.0.0",
-  "description": "NOT USING type:module because of incompatibility style-dictionary and .cjs",
+  "description": "Configurable design token library built on Style Dictionary with CLI support for generating themes, colors, and design system tokens",
   "license": "MIT",
+  "keywords": [
+    "design-tokens",
+    "style-dictionary",
+    "theming",
+    "css-variables",
+    "design-system",
+    "tokens",
+    "css",
+    "scss",
+    "typescript"
+  ],
+  "author": "samelie",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samelie/samelie-monorepo.git",
+    "directory": "packages/design-tokens"
+  },
+  "bin": {
+    "design-tokens": "./dist/cli.mjs"
+  },
   "exports": {
     ".": {
-      "import": "./src/index.ts"
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
     },
+    "./cli": {
+      "types": "./dist/cli.d.ts",
+      "import": "./dist/cli.mjs"
+    },
+    "./package.json": "./package.json",
     "./dark.css": "./output/dark.css",
     "./dark": "./output/dark.ts",
     "./light.css": "./output/light.css",
     "./light": "./output/light.ts"
   },
+  "files": [
+    "dist",
+    "output",
+    "src",
+    "design-tokens.config.ts",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
-    "build": "unbuild && tsx ./sd.config.mts",
+    "build": "unbuild && pnpm build:tokens",
+    "build:cli": "unbuild",
+    "build:tokens": "tsx ./sd.config.mts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "types": "tsc -p tsconfig.typecheck.json",
@@ -21,13 +58,17 @@
   },
   "dependencies": {
     "@rad/publish": "workspace:*",
+    "chokidar": "^4.0.3",
+    "commander": "^14.0.1",
     "culori": "^4.0.2",
+    "picocolors": "^1.1.1",
     "polished": "^4.3.1",
-    "style-dictionary": "^5.1.0"
+    "style-dictionary": "^5.1.1"
   },
   "devDependencies": {
     "@rad/config": "workspace:*",
     "@rad/eslint": "workspace:*",
+    "@types/culori": "^4.0.1",
     "eslint": "^9.37.0",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
