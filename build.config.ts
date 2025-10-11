@@ -1,6 +1,6 @@
-import { makeConfig } from "@rad/build-configs/build.config";
+import { makeConfig } from "@rad/build-configs/unbuild";
 
-export default makeConfig({
+export default makeUnbuildConfig({
     entries: [
         "src/index", // Main library entry point
         "src/cli", // CLI entry point

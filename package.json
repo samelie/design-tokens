@@ -74,5 +74,11 @@
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
   },
-  "type": "module"
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">= 22",
+    "pnpm": ">= 10",
+    "npm": ">= 11"
+  }
 }
