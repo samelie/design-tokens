@@ -1,4 +1,4 @@
-import { makeConfig } from "@rad/build-configs/unbuild";
+import { makeConfig } from "@adddog/build-configs/unbuild";
 
 export default makeUnbuildConfig({
     entries: [

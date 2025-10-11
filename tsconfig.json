@@ -32,7 +32,7 @@
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
         "paths": {
-            "@rad/build-configs/*": [
+            "@adddog/build-configs/*": [
                 "./packages/publish/src/*",
                 "../publish/src/*",
                 "../packages/publish/src/*",
