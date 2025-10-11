@@ -57,7 +57,7 @@
     "knip": "knip"
   },
   "dependencies": {
-    "@rad/publish": "workspace:*",
+    "@rad/build-configs": "workspace:*",
     "chokidar": "^4.0.3",
     "commander": "^14.0.1",
     "culori": "^4.0.2",
