@@ -1,5 +1,5 @@
 {
-  "name": "@rad/design-tokens",
+  "name": "@adddog/design-tokens",
   "version": "1.0.0",
   "description": "Configurable design token library built on Style Dictionary with CLI support for generating themes, colors, and design system tokens",
   "license": "MIT",
@@ -14,11 +14,14 @@
     "scss",
     "typescript"
   ],
-  "author": "samelie",
+  "author": "Sam Elie <sam@add.dog>",
+  "homepage": "https://github.com/samelie/design-tokens#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/samelie/samelie-monorepo.git",
-    "directory": "packages/design-tokens"
+    "url": "https://github.com/samelie/design-tokens.git"
+  },
+  "bugs": {
+    "url": "https://github.com/samelie/design-tokens/issues"
   },
   "bin": {
     "design-tokens": "./dist/cli.mjs"
@@ -50,16 +53,17 @@
   "scripts": {
     "build": "unbuild && pnpm build:tokens",
     "build:cli": "unbuild",
-    "build:tokens": "tsx ./sd.config.mts",
+    "build:tokens": "tsx ./styledict.config.mts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
+    "prepublishOnly": "pnpm run lint && pnpm run types && pnpm run build",
+    "prepack": "pnpm run prepublishOnly",
     "types": "tsc -p tsconfig.typecheck.json",
     "knip": "knip",
     "test": "vitest run",
     "dev": "tsx src/index.ts"
   },
   "dependencies": {
-    "@adddog/build-configs": "workspace:*",
     "chokidar": "^4.0.3",
     "commander": "^14.0.1",
     "culori": "^4.0.2",
@@ -68,7 +72,8 @@
     "style-dictionary": "^5.1.1"
   },
   "devDependencies": {
-    "@adddog/config-defaults": "workspace:*",
+    "@adddog/build-configs": "workspace:*",
+    "@adddog/design-tokens": "workspace:*",
     "@adddog/eslint": "workspace:*",
     "@rad/config": "workspace:*",
     "@types/culori": "^4.0.1",
@@ -78,7 +83,7 @@
     "unbuild": "^3.6.1"
   },
   "type": "module",
-  "private": true,
+  "private": false,
   "engines": {
     "node": ">= 22",
     "pnpm": ">= 10",

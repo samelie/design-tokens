@@ -1,4 +1,4 @@
-# @rad/design-tokens
+# @adddog/design-tokens
 
 A configurable design token library built on [Style Dictionary](https://amzn.github.io/style-dictionary/) with CLI support for generating themes, colors, and design system tokens.
 
@@ -15,11 +15,11 @@ A configurable design token library built on [Style Dictionary](https://amzn.git
 ## Installation
 
 ```bash
-npm install @rad/design-tokens
+npm install @adddog/design-tokens
 # or
-pnpm add @rad/design-tokens
+pnpm add @adddog/design-tokens
 # or
-yarn add @rad/design-tokens
+yarn add @adddog/design-tokens
 ```
 
 ## Quick Start
@@ -37,7 +37,7 @@ This creates a `design-tokens.config.ts` (or `.js`, `.mjs`) file in your project
 Edit the generated config file:
 
 ```typescript
-import { defineConfig } from '@rad/design-tokens';
+import { defineConfig } from '@adddog/design-tokens';
 
 export default defineConfig({
   themes: [
@@ -150,7 +150,7 @@ Options:
 ### Full Configuration Example
 
 ```typescript
-import { defineConfig } from '@rad/design-tokens';
+import { defineConfig } from '@adddog/design-tokens';
 
 export default defineConfig({
   // Required: Define your themes
@@ -257,7 +257,7 @@ themes: [
 You can also use the library programmatically:
 
 ```typescript
-import { buildTokens, loadConfig, resolveConfig } from '@rad/design-tokens';
+import { buildTokens, loadConfig, resolveConfig } from '@adddog/design-tokens';
 
 async function build() {
   const userConfig = await loadConfig('./my-tokens.config.ts');
@@ -317,10 +317,10 @@ This package is also used internally within the monorepo. The workflow is:
 Import the pre-generated tokens directly:
 
 ```typescript
-import { DarkThemeTokens, LightThemeTokens } from '@rad/design-tokens';
+import { DarkThemeTokens, LightThemeTokens } from '@adddog/design-tokens';
 // or
-import '@rad/design-tokens/light.css';
-import '@rad/design-tokens/dark.css';
+import '@adddog/design-tokens/light.css';
+import '@adddog/design-tokens/dark.css';
 ```
 
 The internal build uses the same library API as external consumers, so everything stays in sync!
@@ -334,7 +334,7 @@ import type {
   UserConfig,
   ThemeDefinition,
   OutputConfig
-} from '@rad/design-tokens';
+} from '@adddog/design-tokens';
 ```
 
 ## Scripts

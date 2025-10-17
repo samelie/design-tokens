@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import { promises as fs } from "node:fs";
 import { resolve } from "node:path";
+import process from "node:process";
 import { watch } from "chokidar";
 import { Command } from "commander";
 import pc from "picocolors";

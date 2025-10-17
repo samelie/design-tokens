@@ -1,7 +1,7 @@
 /**
  * Template for the initial design-tokens.config.ts file
  */
-export const configTemplate = `import { defineConfig } from '@rad/design-tokens';
+export const configTemplate = `import { defineConfig } from '@adddog/design-tokens';
 
 export default defineConfig({
   themes: [

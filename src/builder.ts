@@ -1,10 +1,18 @@
 import type {
+    Config,
+    FileHeader,
+    FormatFnArguments,
+    PlatformConfig,
+    TransformedToken,
+} from "style-dictionary/types";
+import type {
     BuildResult,
     ResolvedConfig,
     ThemeDefinition,
 } from "./types/config";
 import { promises as fs } from "node:fs";
 import { join } from "node:path";
+import process from "node:process";
 import { oklch } from "culori";
 import { parseToHsl, parseToRgb } from "polished";
 import StyleDictionary from "style-dictionary";
@@ -17,25 +25,25 @@ const CLASSED_VARIABLES = "css/classed-variables";
 const HEADER_NAME = "radFileHeader";
 const TS_COLOR = "color/ts-colors";
 
-const isTSColor = (prop: any) => {
+const isTSColor = (token: TransformedToken, _options: Config): boolean => {
     return (
-        prop.path.includes("color") &&
-        !prop.name.toLowerCase().includes("rgb") &&
-        !prop.name.toLowerCase().includes("hsl") &&
-        !prop.name.toLowerCase().includes("oklch")
+        token.path.includes("color") &&
+        !token.name.toLowerCase().includes("rgb") &&
+        !token.name.toLowerCase().includes("hsl") &&
+        !token.name.toLowerCase().includes("oklch")
     );
 };
 
-const containsRGB = (prop: any) => {
-    return prop.name && prop.name.includes("rgb");
+const containsRGB = (token: TransformedToken, _options: Config): boolean => {
+    return Boolean(token.name && token.name.includes("rgb"));
 };
 
-const containsHSL = (prop: any) => {
-    return prop.name && prop.name.includes("hsl");
+const containsHSL = (token: TransformedToken, _options: Config): boolean => {
+    return Boolean(token.name && token.name.includes("hsl"));
 };
 
-const containsOKLCH = (prop: any) => {
-    return prop.name && prop.name.includes("oklch");
+const containsOKLCH = (token: TransformedToken, _options: Config): boolean => {
+    return Boolean(token.name && token.name.includes("oklch"));
 };
 
 function getTSColors(theme: string, buildPath: string) {
@@ -59,27 +67,27 @@ function getTSColors(theme: string, buildPath: string) {
 
 // Unused but kept for future TS export support
 // function getJSConfig(theme: string, buildPath: string) {
-// 	return {
-// 		transforms: ["name/camel", "size/rem", "color/hex"],
-// 		format: "javascript/es6",
-// 		buildPath,
-// 		files: [
-// 			{
-// 				destination: `${theme}.ts`,
-// 				format: "javascript/es6",
-// 				filter: (prop: any) => {
-// 					return (
-// 						!prop.name.toLowerCase().includes("rgb") &&
-// 						!prop.path.includes("font")
-// 					);
-// 				},
-// 				options: {
-// 					outputReferences: true,
-// 					fileHeader: HEADER_NAME,
-// 				},
-// 			},
-// 		],
-// 	};
+//   return {
+//     transforms: ["name/camel", "size/rem", "color/hex"],
+//     format: "javascript/es6",
+//     buildPath,
+//     files: [
+//       {
+//         destination: `${theme}.ts`,
+//         format: "javascript/es6",
+//         filter: (token: TransformedToken, _options: Config) => {
+//           return (
+//             !token.name.toLowerCase().includes("rgb") &&
+//             !token.path.includes("font")
+//           );
+//         },
+//         options: {
+//           outputReferences: true,
+//           fileHeader: HEADER_NAME,
+//         },
+//       },
+//     ],
+//   };
 // }
 
 function getSCSS(name: string, buildPath: string) {
@@ -89,10 +97,10 @@ function getSCSS(name: string, buildPath: string) {
         buildPath,
         files: [
             {
-                filter: (prop: any) => {
+                filter: (token: TransformedToken, _options: Config) => {
                     return (
-                        !prop.name.toLowerCase().includes("rgb") &&
-                        !prop.path.includes("font")
+                        !token.name.toLowerCase().includes("rgb") &&
+                        !token.path.includes("font")
                     );
                 },
                 destination: `${name}.scss`,
@@ -242,7 +250,7 @@ export async function buildTokens(
                 `${tempDir}/color/${theme.name}.json`,
             ];
 
-            const platforms: Record<string, any> = {};
+            const platforms: Record<string, PlatformConfig> = {};
 
             // Add platforms based on requested formats
             if (config.output.formats.includes("css")) {
@@ -260,26 +268,26 @@ export async function buildTokens(
 
                 hooks: {
                     filters: {
-                        [TS_COLOR]: isTSColor as any,
+                        [TS_COLOR]: isTSColor,
                     },
                     transforms: {
                         [CUSTOM_RGB]: {
                             type: "value",
-                            filter: containsRGB as any,
+                            filter: containsRGB,
                             transitive: true,
-                            transform: (prop: any) => {
-                                const color = parseToRgb(prop.original.value);
+                            transform: (token: TransformedToken) => {
+                                const color = parseToRgb(String(token.original?.value));
                                 return `${color.red},${color.green},${color.blue}`;
                             },
                         },
                         [CUSTOM_HSL]: {
                             type: "value",
-                            filter: containsHSL as any,
+                            filter: containsHSL,
                             transitive: true,
-                            transform: (prop: any) => {
+                            transform: (token: TransformedToken) => {
                                 const hexValue =
-                                    prop.value || prop.original?.value || prop.original?.$value;
-                                const color = parseToHsl(hexValue);
+                                    token.value || token.original?.value || token.original?.$value;
+                                const color = parseToHsl(String(hexValue));
                                 const h = Math.round(color.hue);
                                 const s = Math.round(color.saturation * 100);
                                 const l = Math.round(color.lightness * 100);
@@ -288,12 +296,12 @@ export async function buildTokens(
                         },
                         [CUSTOM_OKLCH]: {
                             type: "value",
-                            filter: containsOKLCH as any,
+                            filter: containsOKLCH,
                             transitive: true,
-                            transform: (prop: any) => {
+                            transform: (token: TransformedToken) => {
                                 const hexValue =
-                                    prop.value || prop.original?.value || prop.original?.$value;
-                                const color = oklch(hexValue) as any;
+                                    token.value || token.original?.value || token.original?.$value;
+                                const color = oklch(String(hexValue)) as { l?: number; c?: number; h?: number } | undefined;
                                 if (!color) return hexValue;
                                 const l = color.l?.toFixed(3) ?? "0";
                                 const c = color.c?.toFixed(3) ?? "0";
@@ -303,27 +311,27 @@ export async function buildTokens(
                         },
                         [CUSTOM_CSS]: {
                             type: "value",
-                            filter: ((prop: any) => {
+                            filter: (token: TransformedToken, _options: Config) => {
                                 return (
-                                    prop.path.includes("color") &&
-                                    !prop.name.includes("rgb") &&
-                                    !prop.name.includes("hsl") &&
-                                    !prop.name.includes("oklch")
+                                    token.path.includes("color") &&
+                                    !token.name.includes("rgb") &&
+                                    !token.name.includes("hsl") &&
+                                    !token.name.includes("oklch")
                                 );
-                            }) as any,
+                            },
                             transitive: true,
-                            transform: (prop: any) => {
-                                return prop.value;
+                            transform: (token: TransformedToken) => {
+                                return token.value;
                             },
                         },
                     },
                     formats: {
-                        [CLASSED_VARIABLES]: (opts: any) => {
-                            const { dictionary, file, options } = opts;
-                            const { outputReferences, theme, fileHeader: header } = options;
+                        [CLASSED_VARIABLES]: async (args: FormatFnArguments) => {
+                            const { dictionary, options } = args;
+                            const { outputReferences, theme, fileHeader } = options;
 
                             const cssVars = dictionary.allTokens
-                                .map((token: any) => {
+                                .map((token: TransformedToken) => {
                                     const value =
                                         outputReferences &&
                                         token.original &&
@@ -335,11 +343,16 @@ export async function buildTokens(
                                 })
                                 .join("\n");
 
-                            return `/**
- * ${header(file).join("\n * ")}
- **/
+                            let headerLines: string[] = [];
+                            if (typeof fileHeader === "function") {
+                                headerLines = await fileHeader(undefined, options);
+                            }
 
-.${theme} {
+                            const headerComment = headerLines.length > 0
+                                ? `/**\n * ${headerLines.join("\n * ")}\n **/\n\n`
+                                : "";
+
+                            return `${headerComment}.${theme} {
 ${cssVars}
 }
 
@@ -347,11 +360,11 @@ ${cssVars}
                         },
                     },
                     fileHeaders: {
-                        [HEADER_NAME]: () => {
+                        [HEADER_NAME]: (() => {
                             const msg = `This lovely file was brought to you via automation`;
                             const warning = `Please do not update directly, as your changes will not persist`;
                             return [msg, warning];
-                        },
+                        }) satisfies FileHeader,
                     },
                 },
 

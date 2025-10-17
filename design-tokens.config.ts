@@ -1,14 +1,14 @@
 /**
- * Internal monorepo configuration for @rad/design-tokens
+ * Internal monorepo configuration for @adddog/design-tokens
  * This config imports from existing token files to maintain compatibility
  * with the generateRGB() utility that creates rgb/hsl/oklch variants
  */
 import { defineConfig } from "./src/index";
-import { color as sharedColors } from "./src/tokens/shared/color";
-import { color as lightColors } from "./src/tokens/color/light";
 import { color as darkColors } from "./src/tokens/color/dark";
-import { sizing } from "./src/tokens/shared/sizing";
+import { color as lightColors } from "./src/tokens/color/light";
+import { color as sharedColors } from "./src/tokens/shared/color";
 import { font } from "./src/tokens/shared/font";
+import { sizing } from "./src/tokens/shared/sizing";
 
 /**
  * Convert the generated token format to the config format

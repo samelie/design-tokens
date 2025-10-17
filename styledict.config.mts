@@ -3,10 +3,11 @@
  * Uses the new library API to build tokens from design-tokens.config.ts
  */
 import { dirname } from "node:path";
+import process from "node:process";
 import { fileURLToPath } from "node:url";
 import { buildTokens } from "./src/builder";
-import { loadConfig } from "./src/config-loader";
 import { resolveConfig } from "./src/config";
+import { loadConfig } from "./src/config-loader";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

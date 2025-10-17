@@ -1,6 +1,7 @@
 import type { UserConfig } from "./types/config";
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
+import process from "node:process";
 import { pathToFileURL } from "node:url";
 
 const CONFIG_FILE_NAMES = [
