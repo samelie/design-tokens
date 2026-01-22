@@ -69,16 +69,15 @@
     "culori": "^4.0.2",
     "picocolors": "^1.1.1",
     "polished": "^4.3.1",
-    "style-dictionary": "^5.1.4"
+    "style-dictionary": "^5.2.0"
   },
   "devDependencies": {
-    "@adddog/build-configs": "workspace:*",
+    "@adddog/build-configs": "^0.0.5",
     "@adddog/design-tokens": "workspace:*",
-    "@adddog/eslint": "workspace:*",
-    "@rad/config": "workspace:*",
     "@types/culori": "^4.0.1",
     "bumpp": "^10.4.0",
     "eslint": "^9.39.2",
+    "knip": "^5.82.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1"
