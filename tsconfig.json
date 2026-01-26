@@ -39,27 +39,12 @@
                 "../../packages/publish/src/*",
                 "../../../packages/publish/src/*"
             ],
-            "@rad/config/*": [
-                "./packages/config/*",
-                "../config/*",
-                "../packages/config/*",
-                "../../packages/config/*",
-                "../../../packages/config/*"
-            ],
             "@adddog/design-tokens/*": [
                 "./packages/design-tokens/*",
                 "../design-tokens/*",
                 "../packages/design-tokens/*",
                 "../../packages/design-tokens/*",
                 "../../../packages/design-tokens/*"
-            ],
-            "@adddog/eslint": [
-                "./packages/eslint",
-                "../eslint",
-                "../packages/eslint",
-                "../../packages/eslint",
-                "../../../packages/eslint",
-                "../../../../packages/eslint"
             ]
         },
         "types": [
