@@ -5,7 +5,9 @@ import { defineKnipConfig } from "@adddog/monorepo-consistency";
 export default defineKnipConfig({
     entry: ["src/index.ts", "src/cli.ts", "bin/*.{ts,js}"],
     project: ["src/**/*.ts", "bin/**/*.{ts,js}"],
+    // WHY: self-referencing workspace dep for output consumption
     ignoreDependencies: ["@adddog/design-tokens"],
+    // WHY: config/constant files and token source dirs built by style-dictionary, not traced by knip
     ignore: [
         "constants.ts",
         "design-tokens.config.ts",
