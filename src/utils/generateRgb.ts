@@ -1,8 +1,16 @@
-export const generateRGB = <T extends object>(colors: T) => {
+type ColorVariantSuffix = "rgb" | "hsl" | "oklch";
+
+type WithColorVariants<T extends object> = T & {
+    [K in `${string & keyof T}-${ColorVariantSuffix}`]: { value: string };
+};
+
+export const generateRGB = <T extends Record<string, { value: string }>>(
+    colors: T,
+): WithColorVariants<T> => {
     const entries = Object.entries(colors);
 
     // Generate RGB, HSL, and OKLCH variants for each color
-    const result = entries.reduce((acc, entry) => {
+    const result = entries.reduce<WithColorVariants<T>>((acc, entry) => {
         const [k, obj] = entry;
         const { value } = obj;
 
@@ -24,7 +32,7 @@ export const generateRGB = <T extends object>(colors: T) => {
             [hslKey]: { value: hslVal },
             [oklchKey]: { value: oklchVal },
         };
-    }, colors);
+    }, colors as WithColorVariants<T>);
 
     return result;
 };

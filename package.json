@@ -59,7 +59,7 @@
     "prepublishOnly": "pnpm run lint && pnpm run types && pnpm run build",
     "prepack": "pnpm run prepublishOnly",
     "types": "tsc -p tsconfig.typecheck.json",
-    "test": "echo '⚠️⚠️⚠️no test vitest --watch=false'",
+    "test": "vitest --watch=false",
     "dev": "tsx src/index.ts",
     "knip": "knip"
   },
@@ -80,7 +80,8 @@
     "knip": "^5.83.1",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
-    "unbuild": "^3.6.1"
+    "unbuild": "^3.6.1",
+    "vitest": "^4.0.18"
   },
   "type": "module",
   "private": false,
