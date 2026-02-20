@@ -31,22 +31,7 @@
         "noUnusedParameters": true,
         "noFallthroughCasesInSwitch": true,
         "noUncheckedSideEffectImports": true,
-        "paths": {
-            "@adddog/build-configs/*": [
-                "./packages/publish/src/*",
-                "../publish/src/*",
-                "../packages/publish/src/*",
-                "../../packages/publish/src/*",
-                "../../../packages/publish/src/*"
-            ],
-            "@adddog/design-tokens/*": [
-                "./packages/design-tokens/*",
-                "../design-tokens/*",
-                "../packages/design-tokens/*",
-                "../../packages/design-tokens/*",
-                "../../../packages/design-tokens/*"
-            ]
-        },
+        "erasableSyntaxOnly": true,
         "types": [
             "node"
         ]
