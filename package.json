@@ -28,13 +28,10 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": "./src/index.ts"
     },
     "./cli": {
-      "types": "./dist/cli.d.ts",
-      "import": "./dist/cli.mjs"
+      "import": "./src/cli.ts"
     },
     "./package.json": "./package.json",
     "./dark.css": "./output/dark.css",
@@ -42,6 +39,8 @@
     "./light.css": "./output/light.css",
     "./light": "./output/light.ts"
   },
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
   "files": [
     "dist",
     "output",
@@ -87,6 +86,27 @@
   },
   "type": "module",
   "private": false,
+  "publishConfig": {
+    "access": "public",
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.mjs",
+        "require": "./dist/index.cjs"
+      },
+      "./cli": {
+        "types": "./dist/cli.d.ts",
+        "import": "./dist/cli.mjs"
+      },
+      "./package.json": "./package.json",
+      "./dark.css": "./output/dark.css",
+      "./dark": "./output/dark.ts",
+      "./light.css": "./output/light.css",
+      "./light": "./output/light.ts"
+    },
+    "main": "./dist/index.mjs",
+    "types": "./dist/index.d.ts"
+  },
   "engines": {
     "node": ">= 22",
     "pnpm": ">= 10",
