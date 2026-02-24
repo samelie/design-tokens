@@ -1,6 +1,6 @@
 {
   "name": "@adddog/design-tokens",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Configurable design token library built on Style Dictionary with CLI support for generating themes, colors, and design system tokens",
   "license": "MIT",
   "keywords": [
@@ -69,16 +69,16 @@
     "culori": "^4.0.2",
     "picocolors": "^1.1.1",
     "polished": "^4.3.1",
-    "style-dictionary": "^5.3.1"
+    "style-dictionary": "^5.3.2"
   },
   "devDependencies": {
-    "@adddog/build-configs": "^0.0.5",
+    "@adddog/build-configs": "^0.0.6",
     "@adddog/design-tokens": "workspace:*",
     "@adddog/monorepo-consistency": "workspace:*",
     "@types/culori": "^4.0.1",
     "bumpp": "^10.4.1",
-    "eslint": "^10.0.0",
-    "knip": "^5.83.1",
+    "eslint": "^10.0.2",
+    "knip": "^5.85.0",
     "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "unbuild": "^3.6.1",
