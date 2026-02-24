@@ -1,6 +1,6 @@
 {
   "name": "@adddog/design-tokens",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "Configurable design token library built on Style Dictionary with CLI support for generating themes, colors, and design system tokens",
   "license": "MIT",
   "keywords": [
