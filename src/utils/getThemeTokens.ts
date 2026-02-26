@@ -1,4 +1,5 @@
-import { DarkThemeTokens, LightThemeTokens } from "..";
+import * as DarkThemeTokens from "../../output/dark";
+import * as LightThemeTokens from "../../output/light";
 
 export type UndeterminedColorScheme = "dark" | "light" | "system";
 

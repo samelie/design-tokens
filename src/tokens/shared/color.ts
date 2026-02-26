@@ -1,4 +1,4 @@
-import { generateRGB } from "../../utils/index";
+import { generateRGB } from "../../utils/generateRgb";
 
 const SHARED_COLOR_TOKENS = {
     white: { value: "#ffffff" },
