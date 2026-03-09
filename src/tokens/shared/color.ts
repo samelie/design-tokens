@@ -1,5 +1,3 @@
-import { generateRGB } from "../../utils/generateRgb";
-
 const SHARED_COLOR_TOKENS = {
     white: { value: "#ffffff" },
     black: { value: "#000000" },
@@ -85,5 +83,3 @@ const SHARED_COLOR_TOKENS = {
 };
 
 export type SharedColorKeys = keyof typeof SHARED_COLOR_TOKENS;
-
-export const color = generateRGB(SHARED_COLOR_TOKENS);

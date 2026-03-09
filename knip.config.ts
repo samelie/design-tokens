@@ -7,7 +7,8 @@ export default defineKnipConfig({
     project: ["src/**/*.ts","bin/**/*.{ts,js}"],
 }, {
     "ignoreDependencies": [
-        "@adddog/monorepo-consistency"
+        "@adddog/monorepo-consistency",
+        "@adddog/build-configs"
     ],
     "ignoreBinaries": [
         "knip"
