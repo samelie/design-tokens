@@ -55,7 +55,6 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "release": "bumpp --yes --no-push --no-tag --release patch",
-    "prepublishOnly": "pnpm run types && pnpm run build",
     "prepack": "pnpm run prepublishOnly",
     "types": "tsc -p tsconfig.typecheck.json",
     "test": "vitest --watch=false",
