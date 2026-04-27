@@ -1,6 +1,5 @@
 {
     "compilerOptions": {
-        "ignoreDeprecations": "6.0",
         "resolveJsonModule": true,
         "strictNullChecks": true,
         "esModuleInterop": true,
@@ -15,8 +14,7 @@
         "useDefineForClassFields": true,
         "module": "ESNext",
         "lib": [
-            "ESNext",
-            "DOM"
+            "ESNext"
         ],
         "skipLibCheck": true,
         "moduleResolution": "bundler",
