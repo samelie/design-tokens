@@ -76,8 +76,8 @@
     "@types/culori": "^4.0.1",
     "@typescript/native-preview": "beta",
     "bumpp": "^11.1.0",
-    "eslint": "^10.6.0",
-    "knip": "^6.25.0",
+    "eslint": "^10.7.0",
+    "knip": "^6.26.0",
     "tsx": "^4.23.0",
     "unbuild": "^3.6.1",
     "vitest": "^4.1.10"
