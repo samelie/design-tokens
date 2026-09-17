@@ -68,19 +68,19 @@
     "culori": "^4.0.2",
     "picocolors": "^1.1.1",
     "polished": "^4.3.1",
-    "style-dictionary": "^5.5.0"
+    "style-dictionary": "^5.5.3"
   },
   "devDependencies": {
     "@adddog/build-configs": "workspace:*",
     "@adddog/monorepo-consistency": "workspace:*",
     "@types/culori": "^4.0.1",
     "@typescript/native-preview": "beta",
-    "bumpp": "^12.1.1",
-    "eslint": "^10.8.0",
-    "knip": "^6.31.0",
-    "tsx": "^4.23.1",
+    "bumpp": "^12.3.0",
+    "eslint": "^10.10.0",
+    "knip": "^6.35.1",
+    "tsx": "^4.23.13",
     "unbuild": "^3.6.1",
-    "vitest": "^4.1.10"
+    "vitest": "^5.0.0"
   },
   "type": "module",
   "private": false,
